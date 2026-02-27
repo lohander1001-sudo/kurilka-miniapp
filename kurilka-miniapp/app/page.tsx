@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { fetchCMS } from "@/lib/cms";
-import { track } from "@/lib/ga";
-import type { CMS, Lang, Product, TabKey } from "@/lib/types";
-import { AgeGate } from "@/components/AgeGate";
-import { Header } from "@/components/Header";
-import { Tabs } from "@/components/Tabs";
-import { ProductCard } from "@/components/ProductCard";
-import { ProductModal } from "@/components/ProductModal";
-import { Section } from "@/components/Section";
-import { Toast } from "@/components/Toast";
+import { fetchCMS } from "../lib/cms";
+import { track } from "../lib/ga";
+import type { CMS, Lang, Product, TabKey } from "../lib/types";
+import { AgeGate } from "../components/AgeGate";
+import { Header } from "../components/Header";
+import { Tabs } from "../components/Tabs";
+import { ProductCard } from "../components/ProductCard";
+import { ProductModal } from "../components/ProductModal";
+import { Section } from "../components/Section";
+import { Toast } from "../components/Toast";
 
 const DEFAULT_LANG: Lang = "ru";
 
