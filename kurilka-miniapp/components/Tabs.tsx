@@ -1,6 +1,6 @@
 "use client";
 
-import type { TabKey } from "@/lib/types";
+import type { TabKey } from "../lib/types";
 
 export function Tabs(props: {
   active: TabKey;
