@@ -25,7 +25,6 @@ export function Header(props: {
           </div>
           <div className="leading-tight">
             <div className="text-lg font-extrabold neon-text glow">{props.title}</div>
-            <div className="text-[11px] text-white/50">Telegram Mini App</div>
           </div>
         </div>
 
