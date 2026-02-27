@@ -8,9 +8,10 @@ export function Tabs(props: {
   labels: Record<TabKey, string>;
 }) {
   const items: TabKey[] = ["catalog", "how", "delivery", "contacts"];
+
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-20 border-t border-white/5 bg-black/40 backdrop-blur">
-      <div className="mx-auto max-w-md px-3 py-2 grid grid-cols-4 gap-2">
+    <div className="mt-4">
+      <div className="grid grid-cols-4 gap-2">
         {items.map((k) => {
           const active = k === props.active;
           return (
@@ -29,6 +30,6 @@ export function Tabs(props: {
           );
         })}
       </div>
-    </nav>
+    </div>
   );
 }
