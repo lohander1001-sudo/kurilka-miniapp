@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": "vaapee-triple-90k-3in1",
+      "name": {
+        "ru": "Vaapee Triple 90K 3 in 1 (Type-C)",
+        "lv": "Vaapee Triple 90K 3 in 1 (Type-C)",
+        "en": "Vaapee Triple 90K 3 in 1 (Type-C)"
+      },
+      "flavor": {
+        "ru": "Тройной вкус (на выбор)",
+        "lv": "Trīskārša garša (pēc izvēles)",
+        "en": "Triple flavor (choose)"
+      },
+      "puffs": 90000,
+      "nicotinePercent": 5,
+      "price": null,
+      "currency": "EUR",
+      "inStock": true,
+      "images": [
+        "/placeholder.png"
+      ],
+      "description": {
+        "ru": "Digital Screen. 3 вкуса в одном устройстве. Type-C. Выберите комбинацию вкусов из списка ниже.",
+        "lv": "Digitāls ekrāns. 3 garšas vienā ierīcē. Type-C. Izvēlieties garšu kombināciju no saraksta zemāk.",
+        "en": "Digital screen. 3 flavors in one device. Type-C. Choose a flavor combo from the list below."
+      },
+      "flavorList": {
+        "ru": "Комбинации:\n1) RED BULL + BLUEBERRY WATERMELON + MONSTER DRINK\n2) BLUEBERRY ICE + BLACK DRAGON ICE + RED BULL\n3) CHERRY COLA + WATERMELON ICE + BLUEBERRY ICE\n4) STRAWBERRY WATERMELON + COLA ICE + PEACH ICE\n5) DOUBLE APPLE ICE + STRAWBERRY DRAGONFRUIT + RED BULL\n6) PEACH MANGO PINEAPPLE + STRAWBERRY ICE + RASPBERRY WATERMELON\n7) STRAWBERRY RASPBERRY CHERRY + KIWI PASSION FRUIT GUAVA + BLUE RASPBERRY ICE\n8) STRAWBERRY WATERMELON + GRAPE ICE + BLUEBERRY RASPBERRY ICE\n9) MIXED BERRIES + RED BULL + PEACH ICE\n10) PINEAPPLE COCONUT + STRAWBERRY BANANA + BLUE RAZZ ICE",
+        "lv": "Kombinācijas:\n1) RED BULL + BLUEBERRY WATERMELON + MONSTER DRINK\n2) BLUEBERRY ICE + BLACK DRAGON ICE + RED BULL\n3) CHERRY COLA + WATERMELON ICE + BLUEBERRY ICE\n4) STRAWBERRY WATERMELON + COLA ICE + PEACH ICE\n5) DOUBLE APPLE ICE + STRAWBERRY DRAGONFRUIT + RED BULL\n6) PEACH MANGO PINEAPPLE + STRAWBERRY ICE + RASPBERRY WATERMELON\n7) STRAWBERRY RASPBERRY CHERRY + KIWI PASSION FRUIT GUAVA + BLUE RASPBERRY ICE\n8) STRAWBERRY WATERMELON + GRAPE ICE + BLUEBERRY RASPBERRY ICE\n9) MIXED BERRIES + RED BULL + PEACH ICE\n10) PINEAPPLE COCONUT + STRAWBERRY BANANA + BLUE RAZZ ICE",
+        "en": "Combos:\n1) RED BULL + BLUEBERRY WATERMELON + MONSTER DRINK\n2) BLUEBERRY ICE + BLACK DRAGON ICE + RED BULL\n3) CHERRY COLA + WATERMELON ICE + BLUEBERRY ICE\n4) STRAWBERRY WATERMELON + COLA ICE + PEACH ICE\n5) DOUBLE APPLE ICE + STRAWBERRY DRAGONFRUIT + RED BULL\n6) PEACH MANGO PINEAPPLE + STRAWBERRY ICE + RASPBERRY WATERMELON\n7) STRAWBERRY RASPBERRY CHERRY + KIWI PASSION FRUIT GUAVA + BLUE RASPBERRY ICE\n8) STRAWBERRY WATERMELON + GRAPE ICE + BLUEBERRY RASPBERRY ICE\n9) MIXED BERRIES + RED BULL + PEACH ICE\n10) PINEAPPLE COCONUT + STRAWBERRY BANANA + BLUE RAZZ ICE"
+      }
+    }
+  ],
+  "content": {}
+}
