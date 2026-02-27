@@ -11,7 +11,7 @@ export function Header(props: {
     <header className="sticky top-0 z-10 backdrop-blur bg-black/20 border-b border-white/5">
       <div className="mx-auto max-w-md px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-2xl neon-border bg-black/30 flex items-center justify-center overflow-hidden">
+          <div className="h-12 w-12 rounded-3xl neon-border bg-black/30 flex items-center justify-center overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo.png"
