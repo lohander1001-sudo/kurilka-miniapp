@@ -21,7 +21,8 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [ageOk, setAgeOk] = useState(false);
+  const [ageOk, setAgeOk] = useState<boolean>(false);
+
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Product | null>(null);
   const [toast, setToast] = useState<string | null>(null);
@@ -37,7 +38,8 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    setAgeOk(localStorage.getItem("age_confirmed") === "1");
+    const ok = localStorage.getItem("age_confirmed") === "1";
+    setAgeOk(ok);
   }, []);
 
   useEffect(() => {
@@ -55,7 +57,9 @@ export default function Page() {
         if (alive) setLoading(false);
       }
     })();
-    return () => { alive = false; };
+    return () => {
+      alive = false;
+    };
   }, []);
 
   const t = useMemo(() => {
@@ -64,26 +68,45 @@ export default function Page() {
     return { get };
   }, [cms, lang]);
 
-  const products = useMemo(() => (cms?.products ?? []).filter(p => p.inStock), [cms]);
+  const products = useMemo(() => {
+    const list = cms?.products ?? [];
+    return list.filter((p) => p.inStock);
+  }, [cms]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return products;
     return products.filter((p) => {
       const hay = [
-        p.name[lang], p.flavor[lang], p.description[lang],
-        p.name.ru, p.name.lv, p.name.en,
-        p.flavor.ru, p.flavor.lv, p.flavor.en,
-        p.description.ru, p.description.lv, p.description.en
-      ].filter(Boolean).join(" ").toLowerCase();
+        p.name[lang],
+        p.flavor[lang],
+        p.description[lang],
+        p.name.ru,
+        p.name.lv,
+        p.name.en,
+        p.flavor.ru,
+        p.flavor.lv,
+        p.flavor.en,
+        p.description.ru,
+        p.description.lv,
+        p.description.en
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
       return hay.includes(q);
     });
   }, [products, query, lang]);
 
-  const confirmAge = () => {
+  const onConfirmAge = () => {
     localStorage.setItem("age_confirmed", "1");
     setAgeOk(true);
     track("age_confirm");
+  };
+
+  const onSearch = (value: string) => {
+    setQuery(value);
+    track("search", { q: value });
   };
 
   if (!ageOk) {
@@ -91,10 +114,13 @@ export default function Page() {
       <div className="min-h-screen flex items-center justify-center p-4">
         <AgeGate
           title={t.get("age_gate_title", "Только 18+")}
-          text={t.get("age_gate_text", "Витрина доступна только для лиц старше 18 лет.")}
+          text={t.get(
+            "age_gate_text",
+            "Витрина доступна только для лиц старше 18 лет. Подтверждая вход, вы подтверждаете свой возраст."
+          )}
           confirmLabel={t.get("age_gate_confirm", "Мне 18+")}
           exitLabel={t.get("age_gate_exit", "Выйти")}
-          onConfirm={confirmAge}
+          onConfirm={onConfirmAge}
         />
       </div>
     );
@@ -102,9 +128,20 @@ export default function Page() {
 
   return (
     <div className="min-h-screen">
-      <Header title={t.get("app_title", "KURILKA")} lang={lang} setLang={setLang} />
+      <Header lang={lang} setLang={setLang} title={t.get("app_title", "KURILKA")} />
 
-      <main className="mx-auto max-w-md px-4 pb-28">
+      <main className="mx-auto max-w-md px-4 pb-6">
+        <Tabs
+          active={tab}
+          onChange={setTab}
+          labels={{
+            catalog: t.get("catalog_title", "Каталог"),
+            how: t.get("how_buy_tab", "Как купить"),
+            delivery: t.get("delivery_tab", "Доставка"),
+            contacts: t.get("contacts_tab", "Контакты")
+          }}
+        />
+
         {loading ? (
           <div className="mt-6 neon-border rounded-2xl p-4 bg-black/20">
             <div className="animate-pulse space-y-3">
@@ -129,13 +166,11 @@ export default function Page() {
                   <div className="text-lg font-bold neon-text glow">
                     {t.get("catalog_title", "Каталог")}
                   </div>
+
                   <div className="mt-3 neon-border bg-black/20 rounded-2xl p-3">
                     <input
                       value={query}
-                      onChange={(e) => {
-                        setQuery(e.target.value);
-                        track("search", { q: e.target.value });
-                      }}
+                      onChange={(e) => onSearch(e.target.value)}
                       placeholder={t.get("search_placeholder", "Поиск по названию, вкусу…")}
                       className="w-full bg-transparent outline-none text-sm placeholder:text-white/40"
                     />
@@ -168,24 +203,34 @@ export default function Page() {
             {tab === "how" && (
               <Section
                 title={t.get("how_buy_tab", "Как купить")}
-                body={t.get("how_buy_body", "1) Выберите товар в каталоге.\n2) Нажмите «Купить»...")}
+                body={t.get(
+                  "how_buy_body",
+                  "1) Выберите товар...\n2) Нажмите «Купить»...\n..."
+                )}
               />
             )}
 
             {tab === "delivery" && (
               <Section
                 title={t.get("delivery_tab", "Доставка")}
-                body={t.get("delivery_body", "• Omniva / Unisend — 1–2 дня.\n• Бесплатная доставка от 35€.")}
+                body={t.get(
+                  "delivery_body",
+                  "• По Латвии: Omniva / Unisend — 1–2 дня.\n• Бесплатно от 35€ ..."
+                )}
               />
             )}
 
             {tab === "contacts" && (
               <Section
                 title={t.get("contacts_tab", "Контакты")}
-                body={t.get("contacts_body", "Продавец: @aleksejssokolovsaffiliate")}
+                body={t.get(
+                  "contacts_body",
+                  "Продавец: @aleksejssokolovsaffiliate\nНажмите кнопку ниже, чтобы написать в ЛС."
+                )}
                 actionLabel={t.get("contact_button", "Написать продавцу")}
                 onAction={() => {
-                  const username = process.env.NEXT_PUBLIC_SELLER_USERNAME || "aleksejssokolovsaffiliate";
+                  const username =
+                    process.env.NEXT_PUBLIC_SELLER_USERNAME || "aleksejssokolovsaffiliate";
                   track("open_seller_chat", { from: "contacts" });
                   window.open(`https://t.me/${username}`, "_blank");
                 }}
@@ -194,17 +239,6 @@ export default function Page() {
           </>
         )}
       </main>
-
-      <Tabs
-        active={tab}
-        onChange={setTab}
-        labels={{
-          catalog: t.get("catalog_title", "Каталог"),
-          how: t.get("how_buy_tab", "Как купить"),
-          delivery: t.get("delivery_tab", "Доставка"),
-          contacts: t.get("contacts_tab", "Контакты")
-        }}
-      />
 
       {selected && cms ? (
         <ProductModal
@@ -222,7 +256,7 @@ export default function Page() {
             unisend: t.get("delivery_unisend", "Unisend (пакомат)"),
             pickup: t.get("delivery_pickup_daugavpils", "Самовывоз (пакомат Daugavpils)"),
             copyOpen: t.get("copy_and_open_chat", "Скопировать и открыть чат"),
-            copied: t.get("copied_toast", "Скопировано ✅ Вставьте сообщение в чат и отправьте.")
+            copied: t.get("copied_toast", "Скопировано ✅")
           }}
           onToast={(msg) => setToast(msg)}
         />
